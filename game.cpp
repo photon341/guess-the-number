@@ -7,10 +7,10 @@ int main(){
 	cout<<"Welcome to Guess The Number game!\n";
 	cout<<"______________________________________________________________________________________________________________\n";
 	cout<<"You have to guess a number between 1 and 100.\n";
-    cout<<"You'll have 10 choices to guess the correct number. Be careful. Good Luck!\n";
+    cout<<"You'll have 10 chances to guess the correct number. Be careful. Good Luck!\n";
     
     while(true){
-	 	cout << "\nEnter the choice: \n";
+	    cout << "\nEnter the choice: \n";
 	    cout << "1 for Play Game!\n";
 	    cout << "2 for Exit Game!\n\n";
 	    
