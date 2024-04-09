@@ -30,7 +30,7 @@ int main(){
 	            if (playerChoice == secretNumber){
 	                cout<<"Well played! You won, "<<playerChoice<<" is the secret number\n";
 	                cout<<"Thanks for playing...\n";
-	                court<<"Play the game again!!\n\n\n";
+	                cout<<"Play the game again!!\n\n\n";
 	                break;
 	            } else {
 	                cout << "Nope, "<<playerChoice<< " is not the right number\n";
