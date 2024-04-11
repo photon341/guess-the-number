@@ -1,7 +1,75 @@
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
+#include<string>
+
 using namespace std;
+
+int INT_check(string a){
+	int n;
+	try
+	{
+		n = stoi(a);
+	}
+	catch(invalid_argument& e)
+	{
+		cout<<"Error: Please Enter Integer\n";
+		return 1001;
+	}
+	return n;
+	
+
+}
+
+void gusse_number(int N, int secretNumber){
+	int leftChoice = N;
+	int playerChoice;
+	string Choice;
+	for (int i=1;i<=N;i++){
+		cout << "\n\nEnter the number: ";
+		cin >>Choice;
+		playerChoice = INT_check(Choice);
+		if (playerChoice == secretNumber){
+			cout<<"Well played! You won, "<<playerChoice<<" is the secret number\n";
+			cout<<"Thanks for playing...\n";
+			cout<<"Play the game again!!\n\n\n";
+			break;
+		}else if (playerChoice == 1001){	
+			cout<<"please Enter Interger\n";
+			leftChoice--;
+			cout<<leftChoice<<" choices left.\n";
+			if (leftChoice == 0) {
+				cout << "You couldn't find the secret number, it was "<<secretNumber<< ", You lose!!\n";
+				cout << "Play the game again to win!!!\n\n";
+			}
+		}else {
+			cout << "Nope, "<<playerChoice<< " is not the right number\n";
+			if (playerChoice > secretNumber) {
+				cout<<"The secret number is smaller than the number you have chosen\n";
+			} else {
+				cout << "The secret number is greater than the number you have chosen\n";
+			}
+			leftChoice--;
+			cout<<leftChoice<<" choices left.\n";
+			if (leftChoice == 0) {
+				cout << "You couldn't find the secret number, it was "<<secretNumber<< ", You lose!!\n";
+				cout << "Play the game again to win!!!\n\n";
+			}
+
+		}
+	}
+}
+
+int check_level(int l){
+	if(l == 1 || l == 2 || l == 3){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+
 
 int main(){
 	cout<<"Welcome to Guess The Number game!\n";
@@ -14,44 +82,40 @@ int main(){
 	    cout << "1 for Play Game!\n";
 	    cout << "2 for Exit Game!\n\n";
 	    
-	    int userChoice;
+		// int* n = new int;
+		string Num;
+		int userChoice;
+		// *n = userChoice;    
 	    cout<<"Enter the number: ";
-	    cin>>userChoice;
-	        
+	    cin>>Num;
+	    userChoice = INT_check(Num);
 	    srand(time(0));
-	    int secretNumber = 1 + (rand() % 100);
-	    int playerChoice;
+	    int SecretNumber = 1 + (rand() % 100);
 	    if(userChoice == 1){
-	        cout<<"\nYou have 10 choices for finding the secret number between 1 and 100.";
-	        int choicesLeft = 10;
-	        for (int i=1;i<=10;i++){
-	            cout << "\n\nEnter the number: ";
-	            cin >> playerChoice;
-	            if (playerChoice == secretNumber){
-	                cout<<"Well played! You won, "<<playerChoice<<" is the secret number\n";
-	                cout<<"Thanks for playing...\n";
-	                cout<<"Play the game again!!\n\n\n";
-	                break;
-	            } else {
-	                cout << "Nope, "<<playerChoice<< " is not the right number\n";
-	                if (playerChoice > secretNumber) {
-	                    cout<<"The secret number is smaller than the number you have chosen\n";
-	                } else {
-	                    cout << "The secret number is greater than the number you have chosen\n";
-	                }
-	                choicesLeft--;
-	                cout<<choicesLeft<<" choices left.\n";
-	                if (choicesLeft == 0) {
-	                    cout << "You couldn't find the secret number, it was "<<secretNumber<< ", You lose!!\n";
-	                    cout << "Play the game again to win!!!\n\n";
-	                }
-	            }
-	        }
+			string str_level;
+			int level, c=1;
+			while (c == 1)
+			{
+			cout<<"1 for Easy!\n";
+			cout<<"2 for Hard!\n";
+			cout<<"3 for Difficult!\n";
+			cout<<"Enter the Level: \n";
+			cin>>str_level;
+			level = INT_check(str_level);
+			if(check_level(level) == 1){
+				int N_choice = 10/level;
+				cout<<"\nYou have " <<(N_choice)<<" chance for finding the secret number between 1 and 100.";
+				gusse_number(N_choice, SecretNumber);
+				c=0;
+			}else{
+				cout<<"Wrong choice, Enter valid Level to play the game! (1, 2, 3)\n\n";
+			}
+		}
 	    } else if (userChoice == 2) {
 	        exit(0);
 	    } else {
-	        cout << "Wrong choice, Enter valid choice to play the game! (1, 2)\n";
-	    }
+			cout << "Wrong choice, Enter valid choice to play the game! (1, 2)\n";
+		}
 	}
 	return 0;
 }
